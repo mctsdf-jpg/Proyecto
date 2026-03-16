@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -259,3 +261,42 @@
     </script>
 </body>
 </html>
+///agrego los productos para elegir
+
+
+<h2>Lista de productos</h2>
+
+<a href="agregar_producto.php">Agregar producto</a>
+
+<table border="1">
+
+<tr>
+<th>ID</th>
+<th>Nombre</th>
+<th>Precio</th>
+<th>Acciones</th>
+</tr>
+
+<?php while($fila = $resultado->fetch_assoc()) { ?>
+
+<tr>
+
+<td><?php echo $fila["id"]; ?></td>
+
+<td><?php echo $fila["nombre"]; ?></td>
+
+<td><?php echo $fila["precio"]; ?></td>
+
+<td>
+
+<a href="editar_producto.php?id=<?php echo $fila["id"]; ?>">Editar</a>
+
+<a href="eliminar_producto.php?id=<?php echo $fila["id"]; ?>">Eliminar</a>
+
+</td>
+
+</tr>
+
+<?php } ?>
+
+</table>

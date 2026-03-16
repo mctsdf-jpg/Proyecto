@@ -2,7 +2,7 @@
 session_start();
 require "conexion.php";
 
-$error = ""; /// CAMBIO: variable para mostrar errores en pantalla
+$error = ""; // Variable para mostrar errores
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -23,50 +23,58 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION["id"] = $usuario["id"];
             $_SESSION["nombre"] = $usuario["nombre"];
 
-            header("Location: productos.php"); /// CORRECCIÓN: mantener solo productos.php
+            header("Location: productos.php");
             exit();
 
         } else {
-            $error = "Contraseña incorrecta"; /// CAMBIO: en lugar de alert
+            $error = "Contraseña incorrecta";
         }
 
     } else {
-        $error = "Correo no registrado"; /// CAMBIO: en lugar de alert
+        $error = "Correo no registrado";
     }
 }
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MercaSuper">
+    <meta name="author" content="Juan Ojeda">
+    <title>Inicio de sesión</title>
+    <link rel="icon" href="imagenes/logo.png">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h2>Login</h2>
+    <div class="container">
+        <!-- Columna de información -->
+        <div class="info">
+            <p class="txt-1">Gracias por visitarnos</p>
+            <h2>Bienvenidos a MercaSuper</h2>
+        </div>
 
-<p style="color:red;">
-<?php echo $error; ?> 
-</p> 
-<!-- /// CAMBIO: mostrar mensaje de error en la página -->
+        <!-- Formulario de login -->
+        <form class="form" method="POST">
+            <h2>Inicio de sesión</h2>
+            <img src="imagenes/logo.png" alt="Logo" height="80">
+            <p>Entra y disfruta de nuestra gran variedad de productos</p>
 
-<form method="POST">
+            <input id="correo" type="email" name="correo" placeholder="Correo" required>
+            <input id="password" type="password" name="password" placeholder="Contraseña" required>
+            <input type="submit" value="Login">
 
-    <input id="correo" type="email" name="correo" placeholder="Correo" required> 
-    <!-- /// CAMBIO: agregué required -->
+            <p><a href="registro.php">Crear cuenta</a></p>
 
-    <br><br>
-
-    <input id="password" type="password" name="password" placeholder="Contraseña" required>
-    <!-- /// CAMBIO: agregué required -->
-
-    <br><br>
-
-    <input type="submit" value="Login">
-
-</form>
-
-<a href="registro.php">Crear cuenta</a>
+            <?php
+            if (!empty($error)) {
+                echo "<p style='color:red; margin-top:10px;'>$error</p>";
+            }
+            ?>
+        </form>
+    </div>
 
 </body>
 </html>
